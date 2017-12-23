@@ -1,0 +1,30 @@
+################################################################################################
+# Submission by apt321
+# Attack Scenario 10 - Check if Existing File can be opened with create parameter as False
+# 56 Security Layers are Secure
+# 12 logged ERROR ATTACK - 10 | Not Allowing to open existing file!
+# 68 failed due to Fatal Error
+# 21 failed due to Uncaught Repy Exception
+################################################################################################
+
+# Clean up of existing file
+if "testfile.txt.a" in listfiles():
+  removefile("testfile.txt.a")
+if "testfile.txt.b" in listfiles():
+  removefile("testfile.txt.b")
+
+# Open File Function Call
+myfile=ABopenfile("testfile.txt",True)
+
+#Close the file
+myfile.close()
+
+# File should exist, since removed function not called
+# Open File Function Call, again
+try:
+  myfile=ABopenfile("testfile.txt",False)
+except:
+  log("ERROR ATTACK - 10 | Not Allowing to open existing file! \n")
+
+#Close the file
+myfile.close()
